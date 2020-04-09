@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import User from '../services/User';
-import LoginService from '../services/login.service';
-import { debug } from 'util';
+import {AlertController} from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +9,29 @@ import { debug } from 'util';
 export class HomePage {
 
   title: string;
-  private user: User;
 
-  updateTitle(){
-    this.title = "Nouveau titre";
-    this.user = new User('1', 'Duck', 'Daffy', 'Daffy.Duck@gmail.com');
-    console.log(this.user.prenom + '\n' + this.user.nom + '\n' + this.user.email);
+  constructor(private alertController: AlertController) {}
+
+  updateTitle() {
+    this.title = 'Mon Nouveau Titre';
   }
 
-  constructor(private loginService: LoginService) {}
+  /**
+   * https://ionicframework.com/docs/api/alert
+   */
+  async fireAlert() {
+    // creation de l alerte
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+    // quand l alerte sera masquée
+    alert.onDidDismiss().then(() => console.log('alerte masquée'))
+
+    // affichage de l alerte
+    await alert.present();
+  }
 
 }

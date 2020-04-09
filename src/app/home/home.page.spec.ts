@@ -30,6 +30,6 @@ describe('HomePage', () => {
 
   it('update title', () => {
     component.updateTitle();
-    expect(component.title).toBe('Nouveau titre');
+    expect(component.title).toBe('Mon Nouveau Titre');
   });
 });
